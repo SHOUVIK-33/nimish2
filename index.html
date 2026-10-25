@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nimesha to Mahakalpa — Vedic Time, Proven</title>
+<style>
+  :root{
+    --maroon:#5a1212;
+    --maroon-d:#380b0b;
+    --saffron:#e8871e;
+    --gold:#c9a227;
+    --gold-l:#ecd48a;
+    --cream:#fbf4e2;
+    --parch:#f6ead0;
+    --ink:#2c1a10;
+    --muted:#7c6551;
+    --line:#e0cda0;
+    --green:#1f7a4d;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:Georgia,"Times New Roman","Noto Serif Devanagari",serif;
+    color:var(--ink);
+    background:
+      radial-gradient(circle at 15% 20%, rgba(201,162,39,.08) 0 2px, transparent 3px),
+      radial-gradient(circle at 85% 60%, rgba(201,162,39,.08) 0 2px, transparent 3px),
+      linear-gradient(180deg,var(--cream),var(--parch));
+    background-size:60px 60px,60px 60px,auto;
+    line-height:1.7;
+  }
+  .wrap{max-width:1000px;margin:0 auto;padding:0 18px 70px}
+
+  /* ---- temple border strip ---- */
+  .strip{height:14px;background:
+    repeating-linear-gradient(90deg,var(--maroon) 0 22px,var(--gold) 22px 44px);}
+
+  /* ---- hero ---- */
+  header.hero{
+    background:linear-gradient(165deg,#6d1616,var(--maroon-d));
+    color:var(--cream);
+    text-align:center;
+    padding:46px 20px 54px;
+    position:relative;
+    overflow:hidden;
+  }
+  header.hero::before{
+    content:"";position:absolute;inset:0;
+    background:
+      radial-gradient(circle at 50% 120%, rgba(236,212,138,.20), transparent 55%),
+      repeating-radial-gradient(circle at 50% 130%, rgba(236,212,138,.06) 0 1px, transparent 1px 26px);
+    pointer-events:none;
+  }
+  .om{
+    font-size:40px;color:var(--gold-l);line-height:1;
+    display:inline-block;border:2px solid rgba(236,212,138,.5);
+    border-radius:50%;width:74px;height:74px;
+    padding-top:14px;margin-bottom:14px;background:rgba(0,0,0,.15);
+  }
+  header.hero h1{font-size:38px;letter-spacing:.5px;color:var(--gold-l);position:relative}
+  header.hero .tag{margin-top:12px;font-size:15px;color:#f0e2c2;position:relative;max-width:760px;margin-left:auto;margin-right:auto}
+  header.hero .tag b{color:#fff}
+  .rule{display:flex;align-items:center;justify-content:center;gap:12px;margin:16px 0 0;color:var(--gold-l);position:relative}
+  .rule::before,.rule::after{content:"";height:1px;width:90px;background:linear-gradient(90deg,transparent,var(--gold-l),transparent)}
+
+  /* ---- nav ---- */
+  nav{position:sticky;top:0;z-index:30;background:rgba(56,11,11,.96);backdrop-filter:blur(6px);border-bottom:2px solid var(--gold);}
+  nav .inner{max-width:1000px;margin:0 auto;display:flex;flex-wrap:wrap;gap:4px;justify-content:center;padding:8px 12px}
+  nav a{color:#f0e2c2;text-decoration:none;font-size:13.5px;letter-spacing:.4px;padding:7px 13px;border-radius:8px}
+  nav a:hover{background:rgba(236,212,138,.16);color:#fff}
+
+  /* ---- sections ---- */
+  section{margin-top:40px}
+  h2.sec{
+    font-size:25px;color:var(--maroon);text-align:center;
+    display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:6px;
+  }
+  h2.sec::before,h2.sec::after{content:"❖";color:var(--gold);font-size:14px}
+  .sec-sub{text-align:center;color:var(--muted);font-size:14.5px;margin-bottom:22px}
+
+  .card{
+    background:#fffdf6;
+    border:1px solid var(--line);
+    border-radius:16px;
+    box-shadow:0 14px 40px rgba(90,18,18,.10);
+    padding:24px;
+    position:relative;
+  }
+  .card::after{content:"";position:absolute;inset:6px;border:1px solid rgba(201,162,39,.35);border-radius:11px;pointer-events:none}
+
+  /* ---- counter tool ---- */
+  .tool{display:grid;grid-template-columns:1.35fr 1fr;gap:18px}
+  .label{font-size:11.5px;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+  .num{font-size:58px;font-weight:800;font-variant-numeric:tabular-nums;line-height:1.05;color:var(--maroon);margin-top:4px;word-break:break-all}
+  .target{color:var(--muted);font-size:13.5px;margin-top:2px}
+  .clock{font-size:44px;font-weight:800;font-variant-numeric:tabular-nums;color:var(--ink);margin-top:4px}
+  .bar{height:14px;background:#efe3c6;border:1px solid var(--line);border-radius:999px;margin:18px 0 6px;overflow:hidden}
+  .bar > div{height:100%;width:0;background:linear-gradient(90deg,var(--saffron),var(--gold));transition:width .15s linear}
+  .pct{text-align:right;color:var(--muted);font-size:12.5px;font-variant-numeric:tabular-nums}
+  .units{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px}
+  .unit{background:var(--cream);border:1px solid var(--line);border-radius:11px;padding:11px;text-align:center}
+  .unit .k{font-size:11.5px;color:var(--muted);letter-spacing:.4px}
+  .unit .v{font-size:22px;font-weight:800;font-variant-numeric:tabular-nums;margin-top:3px}
+  .controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:20px}
+  button{font:inherit;font-weight:700;cursor:pointer;border:none;border-radius:11px;padding:11px 20px;color:#fff;background:linear-gradient(180deg,var(--saffron),#c96f10);transition:transform .06s,filter .15s}
+  button:active{transform:translateY(1px)}
+  button.ghost{background:transparent;color:var(--maroon);border:1.5px solid var(--maroon)}
+  button:disabled{filter:grayscale(.6) opacity(.55);cursor:not-allowed}
+  .speed{margin-left:auto;display:flex;gap:6px;align-items:center;color:var(--muted);font-size:12.5px}
+  .speed button{padding:7px 11px;border-radius:8px;font-size:12.5px;background:var(--cream);color:var(--muted);border:1px solid var(--line)}
+  .speed button.on{background:linear-gradient(180deg,var(--saffron),#c96f10);color:#fff;border-color:transparent}
+  #feed{max-height:250px;overflow-y:auto;border:1px solid var(--line);border-radius:12px;background:var(--cream);padding:9px;margin-top:16px}
+  .msg{display:flex;gap:10px;align-items:baseline;padding:6px 10px;border-radius:8px;font-size:13.5px;border-left:3px solid var(--line);margin-bottom:5px;background:#fffdf6}
+  .msg .t{color:var(--muted);font-variant-numeric:tabular-nums;font-size:11.5px;min-width:74px}
+  .msg.kashtha{border-left-color:#8a7bd0}
+  .msg.kala{border-left-color:var(--saffron)}
+  .msg.muhurta{border-left-color:#c0392b}
+  .msg.ahoratra{border-left-color:var(--green);background:#eafaf0;color:#12603c;font-weight:700}
+
+  /* ---- tables ---- */
+  .tbl-wrap{overflow-x:auto;margin-top:10px}
+  table{width:100%;border-collapse:collapse;font-size:14.5px;background:#fffdf6}
+  caption{text-align:left;color:var(--muted);font-size:13px;padding:6px 2px}
+  th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+  thead th{background:var(--maroon);color:var(--gold-l);font-weight:700;letter-spacing:.3px;border-bottom:none}
+  tbody tr:nth-child(even){background:var(--cream)}
+  td.numc,th.numc{font-variant-numeric:tabular-nums;white-space:nowrap}
+  .em{color:var(--maroon);font-weight:700}
+
+  /* ---- ladder ---- */
+  .ladder{list-style:none;margin-top:8px;position:relative;padding-left:26px}
+  .ladder::before{content:"";position:absolute;left:8px;top:6px;bottom:6px;width:2px;background:linear-gradient(var(--gold),var(--saffron))}
+  .ladder li{position:relative;margin-bottom:12px;padding-left:14px}
+  .ladder li::before{content:"";position:absolute;left:-22px;top:8px;width:12px;height:12px;border-radius:50%;background:var(--saffron);border:2px solid var(--gold-l)}
+  .ladder .u{font-weight:700;color:var(--maroon)}
+  .ladder .d{color:var(--muted);font-size:13.5px}
+
+  /* ---- accordions (granthas) ---- */
+  details.grantha{border:1px solid var(--line);border-radius:13px;margin-bottom:12px;background:#fffdf6;overflow:hidden}
+  details.grantha[open]{box-shadow:0 10px 26px rgba(90,18,18,.08)}
+  details.grantha > summary{
+    cursor:pointer;list-style:none;padding:15px 18px;font-weight:700;color:var(--maroon);
+    display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:16.5px;
+    background:linear-gradient(180deg,#fffdf6,var(--cream));
+  }
+  details.grantha > summary::-webkit-details-marker{display:none}
+  details.grantha > summary .tagline{font-weight:400;color:var(--muted);font-size:13px}
+  details.grantha > summary::after{content:"+";font-size:20px;color:var(--gold);font-weight:400}
+  details.grantha[open] > summary::after{content:"–"}
+  .g-body{padding:4px 18px 20px}
+  .shloka{
+    background:var(--cream);border-left:4px solid var(--gold);border-radius:8px;
+    padding:14px 16px;margin:12px 0;
+  }
+  .shloka .dev{font-family:"Noto Serif Devanagari",Georgia,serif;font-size:19px;color:var(--maroon-d);line-height:2}
+  .shloka .rom{font-style:italic;color:var(--muted);font-size:13.5px;margin-top:6px}
+  .shloka .tr{color:var(--ink);font-size:14.5px;margin-top:6px}
+  .ref{color:var(--muted);font-size:12.5px;letter-spacing:.3px}
+  .chain{font-size:14.5px;color:var(--ink);margin:8px 0}
+  .chain b{color:var(--maroon)}
+  .note{background:#fdf3df;border:1px dashed var(--gold);border-radius:10px;padding:12px 14px;font-size:13.5px;color:#5b452c;margin-top:14px}
+
+  /* ---- overlay ---- */
+  .overlay{position:fixed;inset:0;background:rgba(30,6,6,.88);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:20px;z-index:60}
+  .overlay.hidden{display:none}
+  .proof{max-width:660px;width:100%;background:#fffdf6;border:3px solid var(--gold);border-radius:20px;padding:30px;text-align:center;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+  .proof h2{color:var(--maroon);font-size:24px;margin-bottom:10px}
+  .proof .tick{font-size:46px;color:var(--green);line-height:1}
+  .proof .eq{font-size:19px;line-height:1.9;margin:14px 0}
+  .proof .eq b{color:var(--maroon)}
+  .proof p{color:var(--muted);font-size:14px;line-height:1.8;margin-top:10px;text-align:left}
+
+  footer{margin-top:50px;border-top:2px solid var(--gold);padding-top:22px;color:var(--muted);font-size:13px;line-height:1.9}
+  footer b{color:var(--maroon)}
+  @media (max-width:720px){
+    .tool{grid-template-columns:1fr}
+    .num{font-size:44px}.clock{font-size:36px}
+    .units{grid-template-columns:repeat(2,1fr)}
+    header.hero h1{font-size:28px}
+    .speed{margin-left:0;width:100%;flex-wrap:wrap}
+  }
+</style>
+</head>
+<body>
+
+<div class="strip"></div>
+<header class="hero">
+  <div class="om">ॐ</div>
+  <h1>From Nimesha to Mahākalpa</h1>
+  <div class="rule"></div>
+  <p class="tag">
+    The Vedic measure of time — from the twinkling of an eye to the lifetime of the cosmos.<br>
+    Per <b>Manusmṛti 1.64</b>: <b>18 nimeṣa = 1 kāṣṭhā</b> · 30 kāṣṭhā = 1 kalā · 30 kalā = 1 muhūrta · 30 muhūrta = 1 ahorātra.<br>
+    The live counter below proves <b>486,000 nimeṣa = 1 ahorātra = 24 hours</b>.
+  </p>
+</header>
+
+<nav>
+  <div class="inner">
+    <a href="#counter">Live Counter</a>
+    <a href="#ladder">The Ladder</a>
+    <a href="#scriptures">Scriptures &amp; Verses</a>
+    <a href="#variations">Variations</a>
+    <a href="#master">Master Table</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <!-- ============ COUNTER ============ -->
+  <section id="counter">
+    <h2 class="sec">The Live Proof</h2>
+    <p class="sec-sub">A counter that advances one nimeṣa every 0.1778 seconds — until 486,000 of them equal one full day.</p>
+    <div class="card">
+      <div class="tool">
+        <div>
+          <div class="label">Nimeṣa count</div>
+          <div id="nimesha" class="num">0</div>
+          <div class="target">of 4,86,000 (Manusmṛti reckoning)</div>
+        </div>
+        <div>
+          <div class="label">Elapsed time</div>
+          <div id="clock" class="clock">00:00:00</div>
+          <div class="target">since the start button was pressed</div>
+        </div>
+      </div>
+
+      <div class="bar"><div id="fill"></div></div>
+      <div class="pct" id="pct">0.000%</div>
+
+      <div class="units">
+        <div class="unit"><div class="k">Kāṣṭhā (18)</div><div class="v" id="u-kashtha">0</div></div>
+        <div class="unit"><div class="k">Kalā (540)</div><div class="v" id="u-kala">0</div></div>
+        <div class="unit"><div class="k">Muhūrta (16,200)</div><div class="v" id="u-muhurta">0</div></div>
+        <div class="unit"><div class="k">Ahorātra (486,000)</div><div class="v" id="u-ahoratra">0</div></div>
+      </div>
+
+      <div class="controls">
+        <button id="startBtn">▶ Start</button>
+        <button id="pauseBtn" class="ghost" disabled>⏸ Pause</button>
+        <button id="resetBtn" class="ghost">↺ Reset</button>
+        <div class="speed">
+          <span>Speed:</span>
+          <button data-sp="1" class="on">1× real</button>
+          <button data-sp="60">60×</button>
+          <button data-sp="600">600×</button>
+          <button data-sp="3600">3600×</button>
+        </div>
+      </div>
+
+      <div id="feed"></div>
+      <div class="note">
+        At <b>1×</b> the counter completes exactly in <b>24 hours</b> — that is the actual proof.
+        Use an accelerated speed to watch the whole cycle finish in seconds (3600× finishes in about 24 s).
+        Progress lives in memory, so a page reload restarts from zero.
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ LADDER ============ -->
+  <section id="ladder">
+    <h2 class="sec">The Ladder of Time</h2>
+    <p class="sec-sub">Ascending from the blink of an eye to the dissolution of Brahmā, as given in the Manusmṛti and the Purāṇas.</p>
+    <div class="card">
+      <div class="label">Within one day (Manusmṛti 1.64)</div>
+      <ul class="ladder">
+        <li><span class="u">1 nimeṣa</span> <span class="d">— a twinkling of the eye ≈ 0.1778 s (8/45 s)</span></li>
+        <li><span class="u">18 nimeṣa = 1 kāṣṭhā</span> <span class="d">— ≈ 3.2 seconds</span></li>
+        <li><span class="u">30 kāṣṭhā = 1 kalā</span> <span class="d">— 540 nimeṣa ≈ 96 seconds</span></li>
+        <li><span class="u">30 kalā = 1 muhūrta</span> <span class="d">— 16,200 nimeṣa ≈ 48 minutes</span></li>
+        <li><span class="u">30 muhūrta = 1 ahorātra</span> <span class="d">— 4,86,000 nimeṣa = 24 hours</span></li>
+      </ul>
+      <div class="label" style="margin-top:20px">Calendar</div>
+      <ul class="ladder">
+        <li><span class="u">15 ahorātra = 1 pakṣa</span> <span class="d">— a fortnight</span></li>
+        <li><span class="u">2 pakṣa = 1 māsa</span> <span class="d">— a month (the day-and-night of the Pitṛs)</span></li>
+        <li><span class="u">2 māsa = 1 ṛtu</span> <span class="d">— a season</span></li>
+        <li><span class="u">3 ṛtu = 1 ayana</span> <span class="d">— six months (sun's northward or southward course)</span></li>
+        <li><span class="u">2 ayana = 1 varṣa</span> <span class="d">— a human year = <b>1 divine day &amp; night</b></span></li>
+      </ul>
+      <div class="label" style="margin-top:20px">Cosmic scale (in divine years of the gods)</div>
+      <ul class="ladder">
+        <li><span class="u">Kali Yuga</span> <span class="d">— 1,200 divine years = 4,32,000 human years</span></li>
+        <li><span class="u">Dvāpara Yuga</span> <span class="d">— 2,400 divine years = 8,64,000 human years</span></li>
+        <li><span class="u">Tretā Yuga</span> <span class="d">— 3,600 divine years = 12,96,000 human years</span></li>
+        <li><span class="u">Satya (Kṛta) Yuga</span> <span class="d">— 4,800 divine years = 17,28,000 human years</span></li>
+        <li><span class="u">1 Mahāyuga (Caturyuga)</span> <span class="d">— 12,000 divine years = 43,20,000 human years</span></li>
+        <li><span class="u">71 Mahāyuga = 1 Manvantara</span> <span class="d">— the reign of one Manu ≈ 30.67 crore human years</span></li>
+        <li><span class="u">14 Manvantaras = 1 Kalpa</span> <span class="d">— also exactly 1,000 Mahāyugas = <b>1 day of Brahmā</b> = 432 crore human years</span></li>
+        <li><span class="u">1 day + 1 night of Brahmā</span> <span class="d">— 2 Kalpas = 864 crore human years</span></li>
+        <li><span class="u">360 days &amp; nights = 1 year of Brahmā</span> <span class="d">— 3.1104 trillion human years</span></li>
+        <li><span class="u">100 years of Brahmā = 1 Mahākalpa</span> <span class="d">— <b>311.04 trillion human years</b>, ending in Mahāpralaya</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ SCRIPTURES ============ -->
+  <section id="scriptures">
+    <h2 class="sec">What the Scriptures Say</h2>
+    <p class="sec-sub">The same ladder appears across the texts — but the smallest ratios differ from book to book. Open each to read the verses.</p>
+
+    <details class="grantha" open>
+      <summary>Manusmṛti (Chapter 1) <span class="tagline">18 nimeṣa = 1 kāṣṭhā</span></summary>
+      <div class="g-body">
+        <p class="chain"><b>1.64 — The base ladder.</b> Eighteen nimeṣa make one kāṣṭhā; thirty kāṣṭhā, one kalā; thirty kalā, one muhūrta; and thirty muhūrta, one ahorātra.</p>
+        <div class="shloka">
+          <div class="dev">निमेषा दश चाष्टौ च काष्ठा त्रिंशत् तु ताः कला । त्रिंशत् कला मुहूर्तः स्यादहोरात्रं तु तावतः ॥ ६४ ॥</div>
+          <div class="rom">nimeṣā daśa cāṣṭau ca kāṣṭhā triṃśat tu tāḥ kalā | triṃśat kalā muhūrtaḥ syād ahorātraṃ tu tāvataḥ || 64 ||</div>
+          <div class="tr">“Ten and eight nimeṣas are one kāṣṭhā; thirty kāṣṭhās one kalā; thirty kalās one muhūrta; and as many muhūrtas, one ahorātra (day and night).”</div>
+          <div class="ref">— Manusmṛti 1.64</div>
+        </div>
+        <p class="chain"><b>1.65–1.67 — Human, ancestral and divine days.</b> The sun divides day and night; a month is the day-and-night of the Pitṛs (manes); and a year is one day-and-night of the gods — Uttarāyaṇa their day, Dakṣiṇāyana their night.</p>
+        <div class="shloka">
+          <div class="dev">अहोरात्रे विभजते सूर्यो मानुषदैविके । रात्रिः स्वप्नाय भूतानां चेष्टायै कर्मणामहः ॥ ६५ ॥</div>
+          <div class="rom">ahorātre vibhajate sūryo mānuṣadaivike | rātriḥ svapnāya bhūtānāṃ ceṣṭāyai karmaṇām ahaḥ || 65 ||</div>
+          <div class="tr">“The sun divides the days and nights of humans and of the gods: night for the sleep of beings, day for the performance of works.”</div>
+          <div class="ref">— Manusmṛti 1.65</div>
+        </div>
+        <div class="shloka">
+          <div class="dev">दैवे रात्र्यहनी वर्षं प्रविभागस्तयोः पुनः । अहस्तत्रोदगयनं रात्रिः स्याद् दक्षिणायनम् ॥ ६७ ॥</div>
+          <div class="rom">daive rātryahanī varṣaṃ pravibhāgas tayoḥ punaḥ | ahas tatrodagayanaṃ rātriḥ syād dakṣiṇāyanam || 67 ||</div>
+          <div class="tr">“A year is a day and a night of the gods: the northward course of the sun is their day, the southward course their night.”</div>
+          <div class="ref">— Manusmṛti 1.67</div>
+        </div>
+        <p class="chain"><b>1.69–1.73 — The Yugas and the day of Brahmā.</b> Kṛta is 4,000 divine years (with twilight hundreds); the others fall by a quarter; the total is 12,000 divine years = one Mahāyuga; and 1,000 such Mahāyugas are one day of Brahmā, with a night of equal length.</p>
+        <div class="shloka">
+          <div class="dev">यदेतत् परिसङ्ख्यातमादावेव चतुर्युगम् । एतद् द्वादशसाहस्रं देवानां युगमुच्यते ॥ ७१ ॥</div>
+          <div class="rom">yad etat parisaṅkhyātam ādāv eva caturyugam | etad dvādaśasāhasraṃ devānāṃ yugam ucyate || 71 ||</div>
+          <div class="tr">“These four ages, thus reckoned, are together called one age of the gods — twelve thousand (divine years).”</div>
+          <div class="ref">— Manusmṛti 1.71</div>
+        </div>
+        <div class="shloka">
+          <div class="dev">दैविकानां युगानां तु सहस्रं परिसङ्ख्यया । ब्राह्ममेकमहर्ज्ञेयं तावतीं रात्रिमेव च ॥ ७२ ॥</div>
+          <div class="rom">daivikānāṃ yugānāṃ tu sahasraṃ parisaṅkhyayā | brāhmam ekam ahar jñeyaṃ tāvatīṃ rātrim eva ca || 72 ||</div>
+          <div class="tr">“A thousand ages of the gods is to be known as one day of Brahmā, and his night is of the same length.”</div>
+          <div class="ref">— Manusmṛti 1.72</div>
+        </div>
+        <p class="chain"><b>1.79 — Manvantara.</b> Twelve thousand divine years, multiplied by seventy-one, is here called a Manvantara (the period of one Manu).</p>
+        <div class="shloka">
+          <div class="dev">यद् प्राग् द्वादशसाहस्रमुदितं दैविकं युगम् । तदेकसप्ततिगुणं मन्वन्तरमिहोच्यते ॥ ७९ ॥</div>
+          <div class="rom">yad prāg dvādaśasāhasram uditaṃ daivikaṃ yugam | tad eka-saptati-guṇaṃ manvantaram iha ucyate || 79 ||</div>
+          <div class="tr">“The age of the gods said before to be twelve thousand (years), multiplied seventy-one-fold, is here named a Manvantara.”</div>
+          <div class="ref">— Manusmṛti 1.79</div>
+        </div>
+        <div class="note">Manusmṛti gives only the ladder up to Brahmā's day and night. The <b>Mahākalpa</b> (100 years of Brahmā) is stated explicitly in the Purāṇas — e.g. Viṣṇu Purāṇa 1.3.</div>
+      </div>
+    </details>
+
+    <details class="grantha">
+      <summary>Viṣṇu Purāṇa (1.3) <span class="tagline">15 nimeṣa = 1 kāṣṭhā</span></summary>
+      <div class="g-body">
+        <p class="chain"><b>1.3.8 — A different first step.</b> Here <b>fifteen</b> nimeṣa make one kāṣṭhā; thirty kāṣṭhā, one kalā; thirty kalā, one muhūrta. The rest of the chain matches Manusmṛti.</p>
+        <div class="shloka">
+          <div class="dev">काष्ठा पञ्चदशाख्याता निमेषा मुनिसत्तम । काष्ठात्रिंशत् कला त्रिंशत् कला मौहूर्तिको विधिः ॥</div>
+          <div class="rom">kāṣṭhā pañcadaśākhyātā nimeṣā munisattama | kāṣṭhā-triṃśat kalā triṃśat kalā mauhūrtiko vidhiḥ ||</div>
+          <div class="tr">“O best of sages, fifteen nimeṣas are called a kāṣṭhā; thirty kāṣṭhās make a kalā; thirty kalās constitute a muhūrta — such is the ordained measure.”</div>
+          <div class="ref">— Viṣṇu Purāṇa 1.3.8 (Parāśara to Maitreya)</div>
+        </div>
+        <p class="chain"><b>1.3.15 &amp; 1.3.18 — Mahāyuga and Manvantara.</b> A thousand Caturyugas are one day of Brahmā; and seventy-one Caturyugas (with an extra portion) make one Manvantara.</p>
+        <div class="shloka">
+          <div class="dev">कृतं त्रेता द्वापरश्च कलिश्चैव चतुर्युगम् । तत्सहस्रं च ब्रह्मणो दिवसं मुने ॥</div>
+          <div class="rom">kṛtaṃ tretā dvāparaś ca kaliś caiva caturyugam | tat-sahasraṃ ca brahmaṇo divasaṃ mune ||</div>
+          <div class="tr">“Kṛta, Tretā, Dvāpara and Kali together are a Caturyuga; and a thousand of these, O sage, are a day of Brahmā.”</div>
+          <div class="ref">— Viṣṇu Purāṇa 1.3.15</div>
+        </div>
+        <div class="shloka">
+          <div class="dev">चतुर्युगाणां संख्याता साधिका ह्येकसप्ततिः । मन्वन्तरं मनोः कालः सुरादीनां च सत्तम ॥</div>
+          <div class="rom">caturyugāṇāṃ saṅkhyātā sādhikā hy eka-saptatiḥ | manvantaraṃ manoḥ kālaḥ surādīnāṃ ca sattama ||</div>
+          <div class="tr">“Seventy-one Caturyugas, with some additional years, make one Manvantara — the period of a Manu and of the gods.”</div>
+          <div class="ref">— Viṣṇu Purāṇa 1.3.18</div>
+        </div>
+        <div class="note">Viṣṇu Purāṇa is the text that spells out the <b>Mahākalpa</b>: a hundred years of Brahmā is his whole life; the half of it (a Parārdha, ≈155.52 trillion years) closed with the <b>Pādma Mahākalpa</b>, and the present age is the Vārāha Kalpa of the second half.</div>
+      </div>
+    </details>
+
+    <details class="grantha">
+      <summary>Bhāgavata Purāṇa (3.11) <span class="tagline">3 nimeṣa = 1 kṣaṇa (atom-upward)</span></summary>
+      <div class="g-body">
+        <p class="chain"><b>3.11.6–3.11.8 — Built from the atom.</b> This scheme starts from the atom and builds <em>downward</em> to the day — and its ratios differ from Manusmṛti: 3 lava = 1 nimeṣa, 3 nimeṣa = 1 kṣaṇa, 5 kṣaṇa = 1 kāṣṭhā, 15 kāṣṭhā = 1 laghu, 15 laghu = 1 nāḍikā, 2 nāḍikā = 1 muhūrta.</p>
+        <div class="shloka">
+          <div class="dev">त्रसरेणुत्रिकं भुङ्क्ते यः कालः स त्रुटिः स्मृतः । शतभागस्तु वेधः स्यात्तैस्त्रिभिस्तु लवः स्मृतः ॥ ६ ॥</div>
+          <div class="rom">trasareṇu-trikaṃ bhuṅkte yaḥ kālaḥ sa truṭiḥ smṛtaḥ | śata-bhāgas tu vedhaḥ syāt tais tribhis tu lavaḥ smṛtaḥ || 6 ||</div>
+          <div class="tr">“The time that integrates three trasareṇus is called a truṭi; a hundred truṭis make a vedha; and three vedhas make a lava.”</div>
+          <div class="ref">— Śrīmad Bhāgavatam 3.11.6</div>
+        </div>
+        <div class="shloka">
+          <div class="dev">निमेषस्त्रिलवो ज्ञेय आम्नातस्ते त्रयः क्षणः । क्षणान्पञ्च विदुः काष्ठां लघु ता दश पञ्च च ॥ ७ ॥</div>
+          <div class="rom">nimeṣas tri-lavo jñeya āmnātas te trayaḥ kṣaṇaḥ | kṣaṇān pañca viduḥ kāṣṭhāṃ laghu tā daśa pañca ca || 7 ||</div>
+          <div class="tr">“Three lavas are to be known as one nimeṣa; three of these make a kṣaṇa; five kṣaṇas make a kāṣṭhā; and fifteen kāṣṭhās make a laghu.”</div>
+          <div class="ref">— Śrīmad Bhāgavatam 3.11.7</div>
+        </div>
+        <div class="shloka">
+          <div class="dev">लघूनि वै समाम्नाता दश पञ्च च नाडिका । ते द्वे मुहूर्तः प्रहरः षड्यामः सप्त वा नृणाम् ॥ ८ ॥</div>
+          <div class="rom">laghūni vai samāmnātā daśa pañca ca nāḍikā | te dve muhūrtaḥ praharaḥ ṣaḍ-yāmaḥ sapta vā nṛṇām || 8 ||</div>
+          <div class="tr">“Fifteen laghus make one nāḍikā (also called daṇḍa); two daṇḍas make a muhūrta; and six or seven daṇḍas make a quarter of a day or night, by human reckoning.”</div>
+          <div class="ref">— Śrīmad Bhāgavatam 3.11.8</div>
+        </div>
+        <div class="note">Because Bhāgavata builds 3 → 3 → 5 → 15 → 15, its nimeṣa comes out larger (roughly 0.53 s by that chain), showing that "nimeṣa" was not a single fixed SI value across traditions.</div>
+      </div>
+    </details>
+
+    <details class="grantha">
+      <summary>Sūrya Siddhānta (1.10–1.12) <span class="tagline">Astronomical / prāṇa-based</span></summary>
+      <div class="g-body">
+        <p class="chain"><b>1.10–1.12 — Measurable (mūrta) time.</b> The astronomical tradition divides time differently: it begins with the <b>prāṇa</b> (one breath, ≈ 4 s). Six prāṇas = 1 vināḍī (pala); sixty vināḍīs = 1 nāḍī (ghaṭikā); sixty nāḍīs = one sidereal day and night.</p>
+        <div class="shloka">
+          <div class="dev">लोकानामन्तकृत्कालः कालोऽन्यः कलनात्मकः । स द्विधा स्थूलसूक्ष्मत्वान्मूर्तश्चामूर्त उच्यते ॥</div>
+          <div class="rom">lokānām antakṛt kālaḥ kālo 'nyaḥ kalanātmakaḥ | sa dvidhā sthūla-sūkṣmatvān mūrtaś cāmūrta ucyate ||</div>
+          <div class="tr">“Time destroys the worlds; another Time is of the nature of reckoning. It is twofold — by grossness and subtlety — called measurable (mūrta) and immeasurable (amūrta).”</div>
+          <div class="ref">— Sūrya Siddhānta 1.10</div>
+        </div>
+        <div class="shloka">
+          <div class="dev">षड्भिः प्राणैर्विनाडी स्यात्तत्षष्ट्या नाडिका स्मृता । तत्त्रिंशता भवेन्मासः सावनोऽर्कोदयैस्तथा ॥</div>
+          <div class="rom">ṣaḍbhiḥ prāṇair vināḍī syāt tat-ṣaṣṭyā nāḍikā smṛtā | tat-triṃśatā bhaven māsaḥ sāvano 'rkodayais tathā ||</div>
+          <div class="tr">“Six prāṇas make a vināḍī; sixty of these a nāḍī; and sixty nāḍīs a sidereal day and night.”</div>
+          <div class="ref">— Sūrya Siddhānta 1.11–1.12</div>
+        </div>
+        <div class="note">In this system the nimeṣa appears lower down: 1 truṭi = 1/33,750 s; 100 truṭi = 1 tatpara; 30 tatpara = 1 nimeṣa (≈ 0.089 s); 18 nimeṣa = 1 kāṣṭhā; 30 kāṣṭhā = 1 kalā; 30 kalā = 1 ghaṭikā (24 min); 2 ghaṭikā = 1 muhūrta.</div>
+      </div>
+    </details>
+
+    <details class="grantha">
+      <summary>Mahābhārata (Śānti Parva 12.231) <span class="tagline">15 nimeṣa = 1 kāṣṭhā; muhūrta variant</span></summary>
+      <div class="g-body">
+        <p class="chain"><b>12.231.12–13.</b> “The ṛṣis, measuring time, have given names to its portions. <b>Fifteen</b> winks of the eye make a kāṣṭhā; thirty kāṣṭhās a kalā; thirty kalās — with a tenth of a kalā — make a muhūrta; thirty muhūrtas make one day and night.”</p>
+        <p class="chain"><b>12.231.16–17.</b> A month of humans is the day-and-night of the departed manes; and a year of humans is the day-and-night of the gods — the sun's northward course their day.</p>
+        <div class="note">Here the muhūrta is slightly larger: <b>30 kalās + 1/10 kalā</b> (some commentaries read “thirty kalās and three kāṣṭhās”). Otherwise the scheme follows the fifteen-nimeṣa tradition.</div>
+      </div>
+    </details>
+
+    <details class="grantha">
+      <summary>Nāṭyaśāstra / Kohala (Tālalakṣaṇa) <span class="tagline">8-based musical time</span></summary>
+      <div class="g-body">
+        <p class="chain"><b>The 8-fold chain.</b> The dramatic/musical tradition measures kāla in powers of eight, and defines the kṣaṇa poetically:</p>
+        <p class="chain">
+          1 kṣaṇa = the time for a needle to pierce a hundred lotus petals stacked together ·
+          <b>8 kṣaṇa = 1 lava</b> ·
+          <b>8 lava = 1 kāṣṭa</b> ·
+          <b>8 kāṣṭa = 1 nimeṣa</b> ·
+          <b>8 nimeṣa = 1 kalā</b>.
+        </p>
+        <div class="note">This is a completely different ladder from Manusmṛti's 18/30/30/30 — a reminder that "nimeṣa" was a relative unit, defined inside each system.</div>
+      </div>
+    </details>
+
+    <details class="grantha">
+      <summary>Arthaśāstra (2.20) <span class="tagline">5 nimeṣa = 1 kāṣṭhā</span></summary>
+      <div class="g-body">
+        <p class="chain"><b>2.20.29–38 — Kauṭilya's table.</b></p>
+        <p class="chain">
+          2 tuṭa = 1 lava ·
+          <b>2 lava = 1 nimeṣa</b> ·
+          <b>5 nimeṣa = 1 kāṣṭhā</b> ·
+          30 kāṣṭhā = 1 kalā ·
+          40 kalā = 1 nālikā ·
+          2 nālikā = 1 muhūrta ·
+          15 muhūrta = 1 day, 15 muhūrta = 1 night.
+        </p>
+        <div class="note">Yet another count: five nimeṣa to a kāṣṭhā, and a different relation between kalā, nālikā and muhūrta.</div>
+      </div>
+    </details>
+
+    <details class="grantha">
+      <summary>Skanda Purāṇa <span class="tagline">15 nimeṣa = 1 kāṣṭhā</span></summary>
+      <div class="g-body">
+        <p class="chain"><b>Prabhāsa Khaṇḍa (measures of time).</b> 15 nimeṣas = 1 kāṣṭhā; 30 kāṣṭhās = 1 kalā; 30 kalās = 1 muhūrta; 30 muhūrtas = day and night (24 hours); then 15 days = pakṣa; 2 pakṣas = month; 2 months = ṛtu; 3 ṛtus = ayana; 2 ayanas = a year.</p>
+        <div class="shloka">
+          <div class="dev">अहोरात्रं मुहूर्तेन मुहूर्तं तु कलाहतम् । कलां काष्ठा हतां कृत्वा काष्ठां निमिषभाजिताम् ॥</div>
+          <div class="rom">ahorātraṃ muhūrtena muhūrtaṃ tu kalāhatam | kalāṃ kāṣṭhā hatāṃ kṛtvā kāṣṭhāṃ nimiṣa-bhājitām ||</div>
+          <div class="tr">“A day-and-night is reckoned by muhūrtas, a muhūrta divided into kalās; a kalā into kāṣṭhās, and a kāṣṭhā into nimeṣas — thus is time measured.”</div>
+          <div class="ref">— Skanda Purāṇa, Prabhāsa Khaṇḍa 19.21</div>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ VARIATIONS ============ -->
+  <section id="variations">
+    <h2 class="sec">Where the Texts Differ</h2>
+    <p class="sec-sub">The big cycles (Mahāyuga → Kalpa → Mahākalpa) agree across the tradition. The small units do not — here is the comparison.</p>
+    <div class="card">
+      <div class="tbl-wrap">
+        <table>
+          <caption>Small-unit chain from nimeṣa to muhūrta, by source</caption>
+          <thead>
+            <tr><th>Source</th><th class="numc">nimeṣa → kāṣṭhā</th><th class="numc">kāṣṭhā → kalā</th><th class="numc">kalā → muhūrta</th><th class="numc">muhūrta → day</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="em">Manusmṛti 1.64</td><td class="numc">18</td><td class="numc">30</td><td class="numc">30</td><td class="numc">30</td></tr>
+            <tr><td>Viṣṇu Purāṇa 1.3.8</td><td class="numc">15</td><td class="numc">30</td><td class="numc">30</td><td class="numc">30</td></tr>
+            <tr><td>Mahābhārata 12.231</td><td class="numc">15</td><td class="numc">30</td><td class="numc">30 (+ ⅒)</td><td class="numc">30</td></tr>
+            <tr><td>Skanda Purāṇa</td><td class="numc">15</td><td class="numc">30</td><td class="numc">30</td><td class="numc">30</td></tr>
+            <tr><td>Bhāgavata 3.11</td><td class="numc">5 kṣaṇa*</td><td class="numc">15 laghu†</td><td class="numc">—</td><td class="numc">8 yāma</td></tr>
+            <tr><td>Arthaśāstra 2.20</td><td class="numc">5</td><td class="numc">30</td><td class="numc">40 kalā = nālikā</td><td class="numc">30 (15+15)</td></tr>
+            <tr><td>Sūrya Siddhānta</td><td class="numc">18</td><td class="numc">30</td><td class="numc">30 = ghaṭikā</td><td class="numc">30</td></tr>
+            <tr><td>Nāṭyaśāstra (Kohala)</td><td class="numc">8 kāṣṭa</td><td class="numc">8 nimeṣa</td><td class="numc">8-based</td><td class="numc">—</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note">
+        * Bhāgavata: 3 nimeṣa = 1 kṣaṇa, 5 kṣaṇa = 1 kāṣṭhā. &nbsp; † 15 kāṣṭhā = 1 laghu, 15 laghu = 1 nāḍikā, 2 nāḍikā = 1 muhūrta.
+        Only the <b>18/30/30/30</b> chain of Manusmṛti gives exactly <b>486,000 nimeṣa = 1 day</b>; the 15-nimeṣa chain gives 405,000.
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MASTER TABLE ============ -->
+  <section id="master">
+    <h2 class="sec">The Master Table</h2>
+    <p class="sec-sub">Nimeṣa to Mahākalpa, on the Manusmṛti reckoning (486,000 nimeṣa = 1 day, 360 days = 1 human year).</p>
+    <div class="card">
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr><th>Unit</th><th>Equals</th><th class="numc">In human years</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="em">1 nimeṣa</td><td>twinkling of the eye</td><td class="numc">≈ 0.1778 s</td></tr>
+            <tr><td class="em">1 kāṣṭhā</td><td>18 nimeṣa</td><td class="numc">3.2 s</td></tr>
+            <tr><td class="em">1 kalā</td><td>30 kāṣṭhā</td><td class="numc">96 s</td></tr>
+            <tr><td class="em">1 muhūrta</td><td>30 kalā</td><td class="numc">48 min</td></tr>
+            <tr><td class="em">1 ahorātra</td><td>30 muhūrta = 486,000 nimeṣa</td><td class="numc">1 day</td></tr>
+            <tr><td class="em">1 varṣa (year)</td><td>360 ahorātra</td><td class="numc">1 year</td></tr>
+            <tr><td class="em">1 Kali Yuga</td><td>1,200 divine years</td><td class="numc">432,000</td></tr>
+            <tr><td class="em">1 Dvāpara Yuga</td><td>2,400 divine years</td><td class="numc">864,000</td></tr>
+            <tr><td class="em">1 Tretā Yuga</td><td>3,600 divine years</td><td class="numc">1,296,000</td></tr>
+            <tr><td class="em">1 Satya Yuga</td><td>4,800 divine years</td><td class="numc">1,728,000</td></tr>
+            <tr><td class="em">1 Mahāyuga</td><td>12,000 divine years</td><td class="numc">4,320,000</td></tr>
+            <tr><td class="em">1 Manvantara</td><td>71 Mahāyuga</td><td class="numc">306,720,000</td></tr>
+            <tr><td class="em">1 Kalpa</td><td>14 Manvantara = 1,000 Mahāyuga = 1 day of Brahmā</td><td class="numc">4,320,000,000</td></tr>
+            <tr><td class="em">1 day + night of Brahmā</td><td>2 Kalpa</td><td class="numc">8,640,000,000</td></tr>
+            <tr><td class="em">1 year of Brahmā</td><td>360 days &amp; nights of Brahmā</td><td class="numc">3,110,400,000,000</td></tr>
+            <tr><td class="em">1 Parārdha</td><td>50 years of Brahmā</td><td class="numc">155,520,000,000,000</td></tr>
+            <tr><td class="em">1 Mahākalpa</td><td>100 years of Brahmā = 2 Parārdhas</td><td class="numc">311,040,000,000,000</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="note">
+        <b>Total nimeṣa in one Mahākalpa:</b><br>
+        486,000 nimeṣa/day × 360 days/year × 311,040,000,000,000 years
+        = <b>≈ 5.442 × 10²² nimeṣa</b> (about <b>54.4 sextillion</b> twinklings of the eye).<br>
+        At the end of it comes <b>Mahāpralaya</b> — Brahmā dissolves back into Brahman, time ceases, and the cycle rests before beginning again.
+      </div>
+      <div class="note" style="border-style:solid;border-color:#d9b96a">
+        <b>A note on accuracy:</b> a widely circulated figure states “≈ 5.6369 × 10¹⁹ nimeṣa (56.3 quintillion)” for the Mahākalpa.
+        That value does not match the Manusmṛti chain — it works out to only ~322 billion years, i.e. about a thousand times too small.
+        Using 486,000 nimeṣa per day and 360 days per year, the correct figure is ≈ 5.44 × 10²² nimeṣa.
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <b>Sources.</b> Manusmṛti 1.64–1.80 (Ganganath Jha translation); Viṣṇu Purāṇa 1.3 (H. H. Wilson translation);
+    Śrīmad Bhāgavatam 3.11.6–3.11.8; Sūrya Siddhānta 1.10–1.12 (Burgess translation); Mahābhārata, Śānti Parva 12.231;
+    Nāṭyaśāstra / Kohala Tālalakṣaṇa; Arthaśāstra 2.20; Skanda Purāṇa, Prabhāsa Khaṇḍa 19.<br><br>
+    <b>Note.</b> This page presents the texts as they stand. Sub-second values (nimeṣa ≈ 0.09–0.53 s) vary by tradition and are approximate;
+    the large cycles (Mahāyuga, Kalpa, Mahākalpa) are consistent across the Purāṇas.
+  </footer>
+
+</div>
+
+<div id="overlay" class="overlay hidden">
+  <div class="proof">
+    <div class="tick">✓</div>
+    <h2>Ahorātra Proven</h2>
+    <div class="eq">
+      486,000 nimeṣa × 0.1778 s = <b>86,400 s</b> = <b>1,440 min</b> = <b>24 hours</b>
+    </div>
+    <p>
+      18 nimeṣa = 1 kāṣṭhā &nbsp;→&nbsp; 486,000 ÷ 18 = 27,000 kāṣṭhā<br>
+      30 kāṣṭhā = 1 kalā &nbsp;→&nbsp; 27,000 ÷ 30 = 900 kalā<br>
+      30 kalā = 1 muhūrta &nbsp;→&nbsp; 900 ÷ 30 = 30 muhūrta<br>
+      30 muhūrta = 1 ahorātra &nbsp;→&nbsp; <b>30 muhūrta = 1 day &amp; night = 24 hours</b> ✓
+    </p>
+    <div style="margin-top:20px"><button id="againBtn">↺ Run Again</button></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---- Manusmriti 1.64 ---- */
+  var KASHTHA = 18;
+  var KALA    = KASHTHA * 30;      // 540
+  var MUHURTA = KALA * 30;         // 16200
+  var AHORATRA= MUHURTA * 30;      // 486000
+
+  /* one day = 86,400,000 ms; one nimesha = 86,400,000 / 486,000 = 1600/9 ms */
+  var NIMESHA_MS = 86400000 / AHORATRA;   // 177.777... ms
+
+  var running=false, accMs=0, basePerf=0, speed=1;
+  var lastCount=0, lastK=0, lastKl=0, lastMu=0, lastAh=0, finished=false, rafId=null;
+
+  var elNimesha=document.getElementById("nimesha");
+  var elClock=document.getElementById("clock");
+  var elFill=document.getElementById("fill");
+  var elPct=document.getElementById("pct");
+  var elK=document.getElementById("u-kashtha");
+  var elKl=document.getElementById("u-kala");
+  var elMu=document.getElementById("u-muhurta");
+  var elAh=document.getElementById("u-ahoratra");
+  var feed=document.getElementById("feed");
+  var overlay=document.getElementById("overlay");
+  var startBtn=document.getElementById("startBtn");
+  var pauseBtn=document.getElementById("pauseBtn");
+  var resetBtn=document.getElementById("resetBtn");
+  var againBtn=document.getElementById("againBtn");
+
+  function fmt(n){ return n.toLocaleString("en-IN"); }
+  function simElapsedMs(){ return running ? accMs + (performance.now()-basePerf)*speed : accMs; }
+  function fmtClock(ms){
+    var s=Math.floor(ms/1000), h=Math.floor(s/3600), m=Math.floor((s%3600)/60), sec=s%60;
+    function p(x){ return (x<10?"0":"")+x; }
+    return p(h)+":"+p(m)+":"+p(sec);
+  }
+  function addMsg(cls, text){
+    var d=document.createElement("div");
+    d.className="msg "+cls;
+    d.innerHTML='<span class="t">'+fmtClock(simElapsedMs())+'</span><span>'+text+'</span>';
+    feed.appendChild(d);
+    while(feed.childNodes.length>80){ feed.removeChild(feed.firstChild); }
+    feed.scrollTop=feed.scrollHeight;
+  }
+  function processMilestones(count){
+    var k=Math.floor(count/KASHTHA);
+    if(k>lastK){
+      if(k-lastK===1) addMsg("kashtha","1 kāṣṭhā complete (kāṣṭhā #"+fmt(k)+")");
+      else addMsg("kashtha","+"+fmt(k-lastK)+" kāṣṭhā complete (now #"+fmt(k)+")");
+      lastK=k;
+    }
+    var kl=Math.floor(count/KALA);
+    if(kl>lastKl){ addMsg("kala","1 kalā complete — 30 kāṣṭhā (kalā #"+fmt(kl)+")"); lastKl=kl; }
+    var mu=Math.floor(count/MUHURTA);
+    if(mu>lastMu){ addMsg("muhurta","1 muhūrta complete — 30 kalā = 48 min (muhūrta #"+fmt(mu)+")"); lastMu=mu; }
+    var ah=Math.floor(count/AHORATRA);
+    if(ah>lastAh){ addMsg("ahoratra","1 ahorātra complete — 486,000 nimeṣa = 24 hours ✓"); lastAh=ah; onComplete(); }
+  }
+  function onComplete(){
+    finished=true; running=false; cancelAnimationFrame(rafId);
+    startBtn.disabled=true; pauseBtn.disabled=true;
+    overlay.classList.remove("hidden");
+  }
+  function render(){
+    var ms=simElapsedMs();
+    var count=Math.floor(ms/NIMESHA_MS);
+    if(count>AHORATRA){ count=AHORATRA; }
+    if(count>lastCount){ processMilestones(count); lastCount=count; }
+    elNimesha.textContent=fmt(count);
+    elClock.textContent=fmtClock(ms);
+    elK.textContent=fmt(Math.floor(count/KASHTHA));
+    elKl.textContent=fmt(Math.floor(count/KALA));
+    elMu.textContent=fmt(Math.floor(count/MUHURTA));
+    elAh.textContent=fmt(Math.floor(count/AHORATRA));
+    var pct=count/AHORATRA*100;
+    elFill.style.width=(pct>100?100:pct)+"%";
+    elPct.textContent=pct.toFixed(3)+"%";
+  }
+  function loop(){ render(); if(running){ rafId=requestAnimationFrame(loop); } }
+  function start(){
+    if(finished||running) return;
+    running=true; basePerf=performance.now();
+    startBtn.disabled=true; pauseBtn.disabled=false;
+    if(lastCount===0 && feed.childNodes.length===0){ addMsg("kashtha","Counting begins — the first nimeṣa is being measured…"); }
+    loop();
+  }
+  function pause(){
+    if(!running) return;
+    accMs += (performance.now()-basePerf)*speed;
+    running=false; cancelAnimationFrame(rafId);
+    startBtn.disabled=false; pauseBtn.disabled=true; render();
+  }
+  function reset(){
+    running=false; finished=false; cancelAnimationFrame(rafId);
+    accMs=0; lastCount=0; lastK=lastKl=lastMu=lastAh=0;
+    feed.innerHTML=""; overlay.classList.add("hidden");
+    startBtn.disabled=false; pauseBtn.disabled=true; render();
+  }
+  function setSpeed(s){
+    if(running){ accMs += (performance.now()-basePerf)*speed; basePerf=performance.now(); }
+    speed=s;
+  }
+
+  startBtn.addEventListener("click",start);
+  pauseBtn.addEventListener("click",pause);
+  resetBtn.addEventListener("click",reset);
+  againBtn.addEventListener("click",reset);
+  var speedBtns=document.querySelectorAll(".speed button");
+  Array.prototype.forEach.call(speedBtns,function(b){
+    b.addEventListener("click",function(){
+      Array.prototype.forEach.call(speedBtns,function(x){ x.classList.remove("on"); });
+      b.classList.add("on");
+      setSpeed(parseInt(b.getAttribute("data-sp"),10));
+    });
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
